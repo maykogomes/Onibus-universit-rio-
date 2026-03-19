@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ônibus – Confirmação de Presença</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --card: #161a23;
+      --accent: #f0c040;
+      --accent2: #3be8b0;
+      --danger: #ff5c5c;
+      --text: #eef0f5;
+      --muted: #6b7280;
+      --border: #252a35;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .wrap { position: relative; z-index: 1; width: 100%; max-width: 480px; }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .bus-icon {
+      font-size: 2.8rem;
+      display: block;
+      margin-bottom: 0.4rem;
+      animation: bounce 2s infinite ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    header h1 span { color: var(--accent); }
+
+    header p {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    #date-label {
+      display: inline-block;
+      margin-top: 0.6rem;
+      background: var(--border);
+      border-radius: 99px;
+      padding: 0.25rem 0.9rem;
+      font-size: 0.78rem;
+      color: var(--accent2);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.6rem;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.08s; }
+    .card:nth-child(3) { animation-delay: 0.16s; }
+    .card:nth-child(4) { animation-delay: 0.24s; }
+
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-14px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(14px); } to{opacity:1;transform:translateY(0);} }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    label.field-label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+      font-weight: 500;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"]:focus { border-color: var(--accent); }
+
+    .toggle-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 0.7rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    }
+
+    .toggle-btn.active { background: var(--accent2); border-color: var(--accent2); color: #0d0f14; }
+    .toggle-btn:hover:not(.active) { border-color: var(--accent); color: var(--text); }
+
+    .btn-confirm {
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 12px;
+      border: none;
+      background: var(--accent);
+      color: #0d0f14;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.15s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-confirm:hover { transform: scale(1.02); }
+    .btn-confirm:active { transform: scale(0.98); }
+    .btn-confirm:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--accent2);
+      color: #0d0f14;
+      padding: 0.7rem 1.5rem;
+      border-radius: 99px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      z-index: 999;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      white-space: nowrap;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+    #toast.err  { background: var(--danger); color: #fff; }
+
+    .counter-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .count-box {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .count-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .count-box.yes   .count-num { color: var(--accent2); }
+    .count-box.total .count-num { color: var(--accent); }
+
+    .count-lbl {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.25rem;
+    }
+
+    .progress-wrap {
+      background: var(--border);
+      border-radius: 99px;
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      border-radius: 99px;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    .list-wrap {
+      max-height: 240px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0.4rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .list-item:last-child { border-bottom: none; }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 0.05em;
+      background: rgba(59,232,176,0.15);
+      color: var(--accent2);
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 1.5rem 0;
+    }
+
+    .admin-toggle {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .admin-toggle button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.78rem;
+      cursor: pointer;
+      text-decoration: underline;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .admin-toggle button:hover { color: var(--text); }
+
+    #admin-panel { display: none; }
+    #admin-panel.visible { display: block; }
+
+    .btn-danger {
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.7rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--danger);
+      background: transparent;
+      color: var(--danger);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-danger:hover { background: var(--danger); color: #fff; }
+
+    .separator { height: 1px; background: var(--border); margin: 1rem 0; }
+
+    #deadline-notice {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    #deadline-notice span { color: var(--accent); font-weight: 600; }
+
+    #conn-status {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); display: inline-block; }
+    .dot.online  { background: var(--accent2); }
+    .dot.offline { background: var(--danger); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="bus-icon">🚌</span>
+    <h1>Ônibus <span>Universitário</span></h1>
+    <p>Confirme sua presença para amanhã</p>
+    <span id="date-label">carregando data…</span>
+  </header>
+
+  <!-- FORM -->
+  <div class="card">
+    <div class="card-title">📋 Sua confirmação</div>
+    <label class="field-label" for="nome">Seu nome completo</label>
+    <input type="text" id="nome" placeholder="Ex: Ana Beatriz Silva" autocomplete="off"/>
+    <label class="field-label">Qual trajeto amanhã?</label>
+    <div class="toggle-group">
+      <button class="toggle-btn" id="btn-ida"      onclick="selectOpt('ida')">🌅 Ida</button>
+      <button class="toggle-btn" id="btn-volta"    onclick="selectOpt('volta')">🌆 Volta</button>
+      <button class="toggle-btn" id="btn-idavolta" onclick="selectOpt('idavolta')">🔄 Ida e volta</button>
+    </div>
+    <button class="btn-confirm" id="btn-confirmar" onclick="confirmar()">Confirmar presença</button>
+  </div>
+
+  <!-- PAINEL -->
+  <div class="card">
+    <div class="card-title">📊 Painel do dia</div>
+    <p id="deadline-notice">Prazo de confirmação: <span id="prazo-hora">até às 22:00</span></p>
+    <div id="conn-status"><span class="dot" id="dot"></span><span id="conn-txt">Conectando…</span></div>
+
+    <div class="counter-row">
+      <div class="count-box yes">
+        <div class="count-num" id="cnt-yes">0</div>
+        <div class="count-lbl">Confirmados</div>
+      </div>
+      <div class="count-box total">
+        <div class="count-num" id="cnt-total">0</div>
+        <div class="count-lbl">Responderam</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+
+    <div class="list-wrap" id="lista">
+      <div class="empty-state">⏳ Carregando…</div>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div class="admin-toggle">
+    <button onclick="toggleAdmin()">⚙️ Área do administrador</button>
+  </div>
+
+  <div class="card" id="admin-panel">
+    <div class="card-title">🔧 Administrador</div>
+    <label class="field-label">Horário limite de confirmação</label>
+    <input type="text" id="prazo-input" placeholder="Ex: 22:00" value="22:00"/>
+    <button class="btn-confirm" style="margin-top:0" onclick="salvarPrazo()">Salvar horário</button>
+    <div class="separator"></div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem;">Exportar lista para WhatsApp:</p>
+    <button class="btn-confirm" style="background:var(--accent2)" onclick="exportarTexto()">📋 Copiar resumo</button>
+    <button class="btn-danger" onclick="resetarDia()">🗑️ Resetar lista do dia</button>
+  </div>
+
+</div>
+
+<div id="toast"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, set, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpTLZ4x1kf-AEbHEEV5RyQzViZGBlHp9Q",
+    authDomain: "transporte-universitario-712d6.firebaseapp.com",
+    databaseURL: "https://transporte-universitario-712d6-default-rtdb.firebaseio.com",
+    projectId: "transporte-universitario-712d6",
+    storageBucket: "transporte-universitario-712d6.firebasestorage.app",
+    messagingSenderId: "716260928548",
+    appId: "1:716260928548:web:ed221e67b632af34083cb1"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
+
+  const labelMap = { ida: 'Ida', volta: 'Volta', idavolta: 'Ida e volta' };
+
+  function todayKey() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function respostasRef() { return ref(db, `dias/${todayKey()}/respostas`); }
+  function prazoRef()     { return ref(db, 'config/prazo'); }
+
+  let selectedOpt  = null;
+  let adminUnlocked = false;
+
+  // Data no header
+  const today = new Date();
+  document.getElementById('date-label').textContent =
+    today.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+  // Prazo em tempo real
+  onValue(prazoRef(), snap => {
+    const prazo = snap.val() || '22:00';
+    document.getElementById('prazo-hora').textContent = `até às ${prazo}`;
+    document.getElementById('prazo-input').value = prazo;
+  });
+
+  // Respostas em tempo real
+  onValue(respostasRef(), snap => {
+    setOnline(true);
+    const data = snap.val() || {};
+    renderLista(Object.values(data));
+  }, () => setOnline(false));
+
+  function setOnline(online) {
+    document.getElementById('dot').className = 'dot ' + (online ? 'online' : 'offline');
+    document.getElementById('conn-txt').textContent = online ? 'Conectado em tempo real' : 'Sem conexão';
+  }
+
+  // Selecionar opção
+  window.selectOpt = function(opt) {
+    selectedOpt = opt;
+    ['ida','volta','idavolta'].forEach(o =>
+      document.getElementById('btn-' + o).classList.toggle('active', o === opt)
+    );
+  };
+
+  // Confirmar presença
+  window.confirmar = async function() {
+    const nome = document.getElementById('nome').value.trim();
+    if (!nome)        { showToast('Digite seu nome!', true); return; }
+    if (!selectedOpt) { showToast('Escolha um trajeto!', true); return; }
+
+    const hora  = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    const chave = nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'');
+
+    await set(ref(db, `dias/${todayKey()}/respostas/${chave}`), { nome, opt: selectedOpt, hora });
+
+    showToast(`✅ ${labelMap[selectedOpt]} confirmado!`);
+    document.getElementById('nome').value = '';
+    selectedOpt = null;
+    ['ida','volta','idavolta'].forEach(o => document.getElementById('btn-' + o).classList.remove('active'));
+  };
+
+  // Render lista
+  function renderLista(respostas) {
+    document.getElementById('cnt-yes').textContent   = respostas.length;
+    document.getElementById('cnt-total').textContent = respostas.length;
+
+    const pct = Math.min(respostas.length * 5, 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    const lista = document.getElementById('lista');
+    if (respostas.length === 0) {
+      lista.innerHTML = '<div class="empty-state">Nenhuma confirmação ainda hoje.</div>';
+      return;
+    }
+
+    lista.innerHTML = [...respostas].reverse().map(r => `
+      <div class="list-item">
+        <span>${r.nome} <small style="color:var(--muted);font-size:0.73rem">${r.hora || ''}</small></span>
+        <span class="badge">${labelMap[r.opt] || r.opt}</span>
+      </div>
+    `).join('');
+  }
+
+  // Admin - toggle com senha
+  window.toggleAdmin = function() {
+    const p = document.getElementById('admin-panel');
+    if (adminUnlocked) { p.classList.toggle('visible'); return; }
+    const senha = prompt('Digite a senha de administrador:');
+    if (senha === '102030#') {
+      adminUnlocked = true;
+      p.classList.add('visible');
+      showToast('🔓 Acesso liberado!');
+    } else {
+      showToast('Senha incorreta!', true);
+    }
+  };
+
+  // Salvar prazo no Firebase
+  window.salvarPrazo = async function() {
+    const v = document.getElementById('prazo-input').value.trim();
+    await set(prazoRef(), v);
+    showToast('Horário salvo!');
+  };
+
+  // Resetar dia
+  window.resetarDia = async function() {
+    if (!confirm('Tem certeza que quer apagar todas as confirmações de hoje?')) return;
+    await remove(respostasRef());
+    showToast('Lista resetada!');
+  };
+
+  // Exportar para WhatsApp
+  window.exportarTexto = async function() {
+    const snap = await get(respostasRef());
+    const respostas = Object.values(snap.val() || {});
+    const hoje = new Date().toLocaleDateString('pt-BR');
+    const grupos = { ida: [], volta: [], idavolta: [] };
+    respostas.forEach(r => grupos[r.opt]?.push(r.nome));
+
+    let txt = `🚌 *Ônibus Universitário – ${hoje}*\n\n`;
+    if (grupos.ida.length)      txt += `🌅 *Só ida (${grupos.ida.length}):*\n`          + grupos.ida.map((n,i)=>`${i+1}. ${n}`).join('\n') + '\n\n';
+    if (grupos.volta.length)    txt += `🌆 *Só volta (${grupos.volta.length}):*\n`       + grupos.volta.map((n,i)=>`${i+1}. ${n}`).join('\n') + '\n\n';
+    if (grupos.idavolta.length) txt += `🔄 *Ida e volta (${grupos.idavolta.length}):*\n` + grupos.idavolta.map((n,i)=>`${i+1}. ${n}`).join('\n') + '\n\n';
+    txt += `Total: ${respostas.length} confirmações`;
+
+    navigator.clipboard.writeText(txt).then(() => showToast('📋 Copiado!'));
+  };
+
+  function showToast(msg, err=false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = err ? 'err show' : 'show';
+    setTimeout(() => t.className = '', 2800);
+  }
+</script>
+</body>
+</html>
