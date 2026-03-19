@@ -48,307 +48,152 @@
       animation: fadeDown 0.6s ease both;
     }
 
-    .bus-icon {
-      font-size: 2.8rem;
-      display: block;
-      margin-bottom: 0.4rem;
-      animation: bounce 2s infinite ease-in-out;
-    }
+    .bus-icon { font-size: 2.8rem; display: block; margin-bottom: 0.4rem; animation: bounce 2s infinite ease-in-out; }
 
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    header h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-    }
-
-    header h1 span { color: var(--accent); }
-
-    header p {
-      margin-top: 0.5rem;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    #date-label {
-      display: inline-block;
-      margin-top: 0.6rem;
-      background: var(--border);
-      border-radius: 99px;
-      padding: 0.25rem 0.9rem;
-      font-size: 0.78rem;
-      color: var(--accent2);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 1.6rem;
-      margin-bottom: 1.2rem;
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .card:nth-child(2) { animation-delay: 0.08s; }
-    .card:nth-child(3) { animation-delay: 0.16s; }
-    .card:nth-child(4) { animation-delay: 0.24s; }
-
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
     @keyframes fadeDown { from { opacity:0; transform:translateY(-14px);} to{opacity:1;transform:translateY(0);} }
     @keyframes fadeUp   { from { opacity:0; transform:translateY(14px); } to{opacity:1;transform:translateY(0);} }
 
-    .card-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 1rem;
+    header h1 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+    header h1 span { color: var(--accent); }
+    header p { margin-top: 0.5rem; color: var(--muted); font-size: 0.9rem; }
+
+    #date-label {
+      display: inline-block; margin-top: 0.6rem; background: var(--border);
+      border-radius: 99px; padding: 0.25rem 0.9rem; font-size: 0.78rem;
+      color: var(--accent2); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
     }
 
-    label.field-label {
-      display: block;
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 0.35rem;
-      font-weight: 500;
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 1.6rem; margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .card:nth-child(2) { animation-delay: 0.08s; }
+    .card:nth-child(3) { animation-delay: 0.16s; }
+
+    .card-title { font-family: 'Syne', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 1rem; }
+
+    label.field-label { display: block; font-size: 0.82rem; color: var(--muted); margin-bottom: 0.35rem; font-weight: 500; }
+
+    input[type="text"], select {
+      width: 100%; background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 10px; padding: 0.75rem 1rem; color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none;
+      transition: border-color 0.2s; margin-bottom: 1rem; appearance: none;
+    }
+    input[type="text"]:focus, select:focus { border-color: var(--accent); }
+
+    select option { background: #1e2330; color: var(--text); }
+
+    .select-wrap { position: relative; margin-bottom: 1rem; }
+    .select-wrap select { margin-bottom: 0; padding-right: 2.5rem; }
+    .select-wrap::after {
+      content: '▾'; position: absolute; right: 1rem; top: 50%;
+      transform: translateY(-50%); color: var(--muted); pointer-events: none; font-size: 1rem;
     }
 
-    input[type="text"] {
-      width: 100%;
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 0.75rem 1rem;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s;
-      margin-bottom: 1rem;
-    }
-
-    input[type="text"]:focus { border-color: var(--accent); }
-
-    .toggle-group {
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 1.2rem;
-      flex-wrap: wrap;
-    }
+    .toggle-group { display: flex; gap: 0.75rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
 
     .toggle-btn {
-      flex: 1;
-      padding: 0.7rem;
-      border-radius: 10px;
-      border: 1.5px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      font-family: 'Syne', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
+      flex: 1; padding: 0.7rem; border-radius: 10px; border: 1.5px solid var(--border);
+      background: transparent; color: var(--muted); font-family: 'Syne', sans-serif;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
       display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      min-width: 80px;
     }
-
     .toggle-btn.active { background: var(--accent2); border-color: var(--accent2); color: #0d0f14; }
     .toggle-btn:hover:not(.active) { border-color: var(--accent); color: var(--text); }
 
     .btn-confirm {
-      width: 100%;
-      padding: 0.9rem;
-      border-radius: 12px;
-      border: none;
-      background: var(--accent);
-      color: #0d0f14;
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem;
-      font-weight: 800;
-      cursor: pointer;
-      transition: transform 0.15s, opacity 0.15s;
+      width: 100%; padding: 0.9rem; border-radius: 12px; border: none;
+      background: var(--accent); color: #0d0f14; font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 800; cursor: pointer; transition: transform 0.15s, opacity 0.15s;
       letter-spacing: 0.02em;
     }
-
     .btn-confirm:hover { transform: scale(1.02); }
     .btn-confirm:active { transform: scale(0.98); }
     .btn-confirm:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
     #toast {
-      position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--accent2);
-      color: #0d0f14;
-      padding: 0.7rem 1.5rem;
-      border-radius: 99px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      z-index: 999;
-      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-      white-space: nowrap;
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--accent2); color: #0d0f14; padding: 0.7rem 1.5rem; border-radius: 99px;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; z-index: 999;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); white-space: nowrap;
     }
     #toast.show { transform: translateX(-50%) translateY(0); }
     #toast.err  { background: var(--danger); color: #fff; }
 
-    .counter-row {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
+    /* Painel de rotas */
+    .rotas-grid { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0.5rem; }
+
+    .rota-box {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 0.9rem 1rem;
     }
 
-    .count-box {
-      flex: 1;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem;
-      text-align: center;
+    .rota-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.4rem;
     }
 
-    .count-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 800;
-      line-height: 1;
-    }
+    .rota-nome { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--accent); }
+    .rota-count { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--accent2); }
 
-    .count-box.yes   .count-num { color: var(--accent2); }
-    .count-box.total .count-num { color: var(--accent); }
+    .rota-detalhes { font-size: 0.72rem; color: var(--muted); }
 
-    .count-lbl {
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 0.25rem;
-    }
-
-    .progress-wrap {
-      background: var(--border);
-      border-radius: 99px;
-      height: 6px;
-      overflow: hidden;
-      margin-bottom: 1rem;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
-      border-radius: 99px;
-      transition: width 0.5s ease;
-      width: 0%;
-    }
-
-    .list-wrap {
-      max-height: 240px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
-    }
+    /* Lista geral */
+    .list-wrap { max-height: 280px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 
     .list-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.55rem 0.4rem;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.88rem;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--border); font-size: 0.85rem;
     }
-
     .list-item:last-child { border-bottom: none; }
+    .list-item-info { display: flex; flex-direction: column; gap: 0.1rem; }
+    .list-item-name { font-weight: 500; }
+    .list-item-sub { font-size: 0.7rem; color: var(--muted); }
 
     .badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.2rem 0.6rem;
-      border-radius: 99px;
-      font-family: 'Syne', sans-serif;
-      letter-spacing: 0.05em;
-      background: rgba(59,232,176,0.15);
-      color: var(--accent2);
-      white-space: nowrap;
+      font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 99px;
+      font-family: 'Syne', sans-serif; letter-spacing: 0.04em; white-space: nowrap;
+      background: rgba(59,232,176,0.15); color: var(--accent2);
     }
 
-    .empty-state {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-      padding: 1.5rem 0;
-    }
+    .empty-state { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 1.5rem 0; }
 
-    .admin-toggle {
-      text-align: center;
-      margin-top: 0.5rem;
-    }
+    .counter-row { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+    .count-box { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem; text-align: center; }
+    .count-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1; color: var(--accent2); }
+    .count-box.total .count-num { color: var(--accent); }
+    .count-lbl { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; }
 
-    .admin-toggle button {
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 0.78rem;
-      cursor: pointer;
-      text-decoration: underline;
-      font-family: 'DM Sans', sans-serif;
-    }
+    .progress-wrap { background: var(--border); border-radius: 99px; height: 6px; overflow: hidden; margin-bottom: 1rem; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 99px; transition: width 0.5s ease; width: 0%; }
 
+    .admin-toggle { text-align: center; margin-top: 0.5rem; }
+    .admin-toggle button { background: none; border: none; color: var(--muted); font-size: 0.78rem; cursor: pointer; text-decoration: underline; font-family: 'DM Sans', sans-serif; }
     .admin-toggle button:hover { color: var(--text); }
 
     #admin-panel { display: none; }
     #admin-panel.visible { display: block; }
 
-    .btn-danger {
-      width: 100%;
-      margin-top: 0.75rem;
-      padding: 0.7rem;
-      border-radius: 10px;
-      border: 1.5px solid var(--danger);
-      background: transparent;
-      color: var(--danger);
-      font-family: 'Syne', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
+    .btn-danger { width: 100%; margin-top: 0.75rem; padding: 0.7rem; border-radius: 10px; border: 1.5px solid var(--danger); background: transparent; color: var(--danger); font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
     .btn-danger:hover { background: var(--danger); color: #fff; }
 
     .separator { height: 1px; background: var(--border); margin: 1rem 0; }
 
-    #deadline-notice {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 1.2rem;
-    }
-
+    #deadline-notice { text-align: center; font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
     #deadline-notice span { color: var(--accent); font-weight: 600; }
 
-    #conn-status {
-      text-align: center;
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-    }
-
+    #conn-status { text-align: center; font-size: 0.72rem; color: var(--muted); margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 0.4rem; }
     .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); display: inline-block; }
     .dot.online  { background: var(--accent2); }
     .dot.offline { background: var(--danger); }
+
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .tab { flex: 1; padding: 0.5rem; border-radius: 8px; border: 1.5px solid var(--border); background: transparent; color: var(--muted); font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; text-align: center; }
+    .tab.active { background: var(--border); color: var(--text); border-color: var(--accent); }
   </style>
 </head>
 <body>
@@ -364,25 +209,39 @@
   <!-- FORM -->
   <div class="card">
     <div class="card-title">📋 Sua confirmação</div>
+
     <label class="field-label" for="nome">Seu nome completo</label>
     <input type="text" id="nome" placeholder="Ex: Ana Beatriz Silva" autocomplete="off"/>
-    <label class="field-label">Qual trajeto amanhã?</label>
+
+    <label class="field-label">Sua rota</label>
+    <div class="select-wrap">
+      <select id="rota-select">
+        <option value="">Selecione sua rota…</option>
+        <option value="rota1">🔵 Rota 1 — UNP-ZN / ESTÁCIO / UNI-RN / IFRN / GRAU / UNIP / UNOPAR / UERN / UNICEUNA / UNIASSELVI / OUTRAS</option>
+        <option value="rota2">🟢 Rota 2 — UFRN</option>
+        <option value="rota3">🟡 Rota 3 — UNP – SALGADO FILHO</option>
+        <option value="rota4">🟠 Rota 4 — FACEX / UNINASSAU I / UNINASSAU II</option>
+      </select>
+    </div>
+
+    <label class="field-label">Trajeto</label>
     <div class="toggle-group">
       <button class="toggle-btn" id="btn-ida"      onclick="selectOpt('ida')">🌅 Ida</button>
       <button class="toggle-btn" id="btn-volta"    onclick="selectOpt('volta')">🌆 Volta</button>
       <button class="toggle-btn" id="btn-idavolta" onclick="selectOpt('idavolta')">🔄 Ida e volta</button>
     </div>
+
     <button class="btn-confirm" id="btn-confirmar" onclick="confirmar()">Confirmar presença</button>
   </div>
 
   <!-- PAINEL -->
   <div class="card">
     <div class="card-title">📊 Painel do dia</div>
-    <p id="deadline-notice">Prazo de confirmação: <span id="prazo-hora">até às 22:00</span></p>
+    <p id="deadline-notice">Prazo: <span id="prazo-hora">até às 22:00</span></p>
     <div id="conn-status"><span class="dot" id="dot"></span><span id="conn-txt">Conectando…</span></div>
 
     <div class="counter-row">
-      <div class="count-box yes">
+      <div class="count-box">
         <div class="count-num" id="cnt-yes">0</div>
         <div class="count-lbl">Confirmados</div>
       </div>
@@ -392,12 +251,26 @@
       </div>
     </div>
 
-    <div class="progress-wrap">
-      <div class="progress-fill" id="progress-fill"></div>
+    <div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="setTab('rotas')">Por rota</button>
+      <button class="tab" onclick="setTab('lista')">Lista geral</button>
     </div>
 
-    <div class="list-wrap" id="lista">
-      <div class="empty-state">⏳ Carregando…</div>
+    <!-- Por rota -->
+    <div id="tab-rotas">
+      <div class="rotas-grid" id="rotas-grid">
+        <div class="empty-state">⏳ Carregando…</div>
+      </div>
+    </div>
+
+    <!-- Lista geral -->
+    <div id="tab-lista" style="display:none">
+      <div class="list-wrap" id="lista">
+        <div class="empty-state">⏳ Carregando…</div>
+      </div>
     </div>
   </div>
 
@@ -438,24 +311,28 @@
   const app = initializeApp(firebaseConfig);
   const db  = getDatabase(app);
 
-  const labelMap = { ida: 'Ida', volta: 'Volta', idavolta: 'Ida e volta' };
+  const ROTAS = {
+    rota1: { emoji: '🔵', label: 'Rota 1', detalhe: 'UNP-ZN / ESTÁCIO / UNI-RN / IFRN / GRAU / UNIP / UNOPAR / UERN / UNICEUNA / UNIASSELVI / OUTRAS' },
+    rota2: { emoji: '🟢', label: 'Rota 2', detalhe: 'UFRN' },
+    rota3: { emoji: '🟡', label: 'Rota 3', detalhe: 'UNP – SALGADO FILHO' },
+    rota4: { emoji: '🟠', label: 'Rota 4', detalhe: 'FACEX / UNINASSAU I / UNINASSAU II' },
+  };
 
-  function todayKey() {
-    return new Date().toISOString().slice(0, 10);
-  }
+  const TRAJETOS = { ida: 'Ida', volta: 'Volta', idavolta: 'Ida e volta' };
 
+  function todayKey() { return new Date().toISOString().slice(0, 10); }
   function respostasRef() { return ref(db, `dias/${todayKey()}/respostas`); }
   function prazoRef()     { return ref(db, 'config/prazo'); }
 
-  let selectedOpt  = null;
+  let selectedOpt = null;
   let adminUnlocked = false;
+  let currentTab = 'rotas';
 
-  // Data no header
-  const today = new Date();
+  // Data
   document.getElementById('date-label').textContent =
-    today.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+    new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
 
-  // Prazo em tempo real
+  // Prazo
   onValue(prazoRef(), snap => {
     const prazo = snap.val() || '22:00';
     document.getElementById('prazo-hora').textContent = `até às ${prazo}`;
@@ -466,7 +343,7 @@
   onValue(respostasRef(), snap => {
     setOnline(true);
     const data = snap.val() || {};
-    renderLista(Object.values(data));
+    renderTudo(Object.values(data));
   }, () => setOnline(false));
 
   function setOnline(online) {
@@ -474,7 +351,6 @@
     document.getElementById('conn-txt').textContent = online ? 'Conectado em tempo real' : 'Sem conexão';
   }
 
-  // Selecionar opção
   window.selectOpt = function(opt) {
     selectedOpt = opt;
     ['ida','volta','idavolta'].forEach(o =>
@@ -482,96 +358,92 @@
     );
   };
 
-  // Confirmar presença
   window.confirmar = async function() {
-    const nome = document.getElementById('nome').value.trim();
+    const nome  = document.getElementById('nome').value.trim();
+    const rota  = document.getElementById('rota-select').value;
     if (!nome)        { showToast('Digite seu nome!', true); return; }
-    if (!selectedOpt) { showToast('Escolha um trajeto!', true); return; }
+    if (!rota)        { showToast('Selecione sua rota!', true); return; }
+    if (!selectedOpt) { showToast('Escolha ida, volta ou ida e volta!', true); return; }
 
     const hora  = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     const chave = nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'');
 
-    await set(ref(db, `dias/${todayKey()}/respostas/${chave}`), { nome, opt: selectedOpt, hora });
+    await set(ref(db, `dias/${todayKey()}/respostas/${chave}`), { nome, rota, opt: selectedOpt, hora });
 
-    showToast(`✅ ${labelMap[selectedOpt]} confirmado!`);
+    showToast(`✅ ${ROTAS[rota].label} — ${TRAJETOS[selectedOpt]} confirmado!`);
     document.getElementById('nome').value = '';
+    document.getElementById('rota-select').value = '';
     selectedOpt = null;
     ['ida','volta','idavolta'].forEach(o => document.getElementById('btn-' + o).classList.remove('active'));
   };
 
-  // Render lista
-  function renderLista(respostas) {
+  function renderTudo(respostas) {
     document.getElementById('cnt-yes').textContent   = respostas.length;
     document.getElementById('cnt-total').textContent = respostas.length;
+    document.getElementById('progress-fill').style.width = Math.min(respostas.length * 4, 100) + '%';
 
-    const pct = Math.min(respostas.length * 5, 100);
-    document.getElementById('progress-fill').style.width = pct + '%';
+    renderRotas(respostas);
+    renderLista(respostas);
+  }
 
+  function renderRotas(respostas) {
+    const grid = document.getElementById('rotas-grid');
+    if (respostas.length === 0) {
+      grid.innerHTML = '<div class="empty-state">Nenhuma confirmação ainda hoje.</div>';
+      return;
+    }
+
+    grid.innerHTML = Object.entries(ROTAS).map(([key, r]) => {
+      const grupo = respostas.filter(x => x.rota === key);
+      const ida   = grupo.filter(x => x.opt === 'ida').length;
+      const volta = grupo.filter(x => x.opt === 'volta').length;
+      const iv    = grupo.filter(x => x.opt === 'idavolta').length;
+      return `
+        <div class="rota-box">
+          <div class="rota-header">
+            <div>
+              <div class="rota-nome">${r.emoji} ${r.label}</div>
+              <div class="rota-detalhes">${r.detalhe}</div>
+            </div>
+            <div class="rota-count">${grupo.length}</div>
+          </div>
+          ${grupo.length > 0 ? `<div class="rota-detalhes" style="margin-top:0.4rem">🌅 Ida: ${ida} &nbsp;|&nbsp; 🌆 Volta: ${volta} &nbsp;|&nbsp; 🔄 Ida e volta: ${iv}</div>` : '<div class="rota-detalhes" style="margin-top:0.3rem">Sem confirmações</div>'}
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderLista(respostas) {
     const lista = document.getElementById('lista');
     if (respostas.length === 0) {
       lista.innerHTML = '<div class="empty-state">Nenhuma confirmação ainda hoje.</div>';
       return;
     }
-
-    lista.innerHTML = [...respostas].reverse().map(r => `
-      <div class="list-item">
-        <span>${r.nome} <small style="color:var(--muted);font-size:0.73rem">${r.hora || ''}</small></span>
-        <span class="badge">${labelMap[r.opt] || r.opt}</span>
-      </div>
-    `).join('');
+    lista.innerHTML = [...respostas].reverse().map(r => {
+      const rota = ROTAS[r.rota] || { emoji: '🚌', label: r.rota };
+      return `
+        <div class="list-item">
+          <div class="list-item-info">
+            <span class="list-item-name">${r.nome}</span>
+            <span class="list-item-sub">${rota.emoji} ${rota.label} · ${r.hora || ''}</span>
+          </div>
+          <span class="badge">${TRAJETOS[r.opt] || r.opt}</span>
+        </div>
+      `;
+    }).join('');
   }
 
-  // Admin - toggle com senha
+  window.setTab = function(tab) {
+    currentTab = tab;
+    document.getElementById('tab-rotas').style.display = tab === 'rotas' ? 'block' : 'none';
+    document.getElementById('tab-lista').style.display = tab === 'lista'  ? 'block' : 'none';
+    document.querySelectorAll('.tab').forEach((el, i) => {
+      el.classList.toggle('active', (i === 0 && tab === 'rotas') || (i === 1 && tab === 'lista'));
+    });
+  };
+
   window.toggleAdmin = function() {
     const p = document.getElementById('admin-panel');
     if (adminUnlocked) { p.classList.toggle('visible'); return; }
     const senha = prompt('Digite a senha de administrador:');
-    if (senha === '102030#') {
-      adminUnlocked = true;
-      p.classList.add('visible');
-      showToast('🔓 Acesso liberado!');
-    } else {
-      showToast('Senha incorreta!', true);
-    }
-  };
-
-  // Salvar prazo no Firebase
-  window.salvarPrazo = async function() {
-    const v = document.getElementById('prazo-input').value.trim();
-    await set(prazoRef(), v);
-    showToast('Horário salvo!');
-  };
-
-  // Resetar dia
-  window.resetarDia = async function() {
-    if (!confirm('Tem certeza que quer apagar todas as confirmações de hoje?')) return;
-    await remove(respostasRef());
-    showToast('Lista resetada!');
-  };
-
-  // Exportar para WhatsApp
-  window.exportarTexto = async function() {
-    const snap = await get(respostasRef());
-    const respostas = Object.values(snap.val() || {});
-    const hoje = new Date().toLocaleDateString('pt-BR');
-    const grupos = { ida: [], volta: [], idavolta: [] };
-    respostas.forEach(r => grupos[r.opt]?.push(r.nome));
-
-    let txt = `🚌 *Ônibus Universitário – ${hoje}*\n\n`;
-    if (grupos.ida.length)      txt += `🌅 *Só ida (${grupos.ida.length}):*\n`          + grupos.ida.map((n,i)=>`${i+1}. ${n}`).join('\n') + '\n\n';
-    if (grupos.volta.length)    txt += `🌆 *Só volta (${grupos.volta.length}):*\n`       + grupos.volta.map((n,i)=>`${i+1}. ${n}`).join('\n') + '\n\n';
-    if (grupos.idavolta.length) txt += `🔄 *Ida e volta (${grupos.idavolta.length}):*\n` + grupos.idavolta.map((n,i)=>`${i+1}. ${n}`).join('\n') + '\n\n';
-    txt += `Total: ${respostas.length} confirmações`;
-
-    navigator.clipboard.writeText(txt).then(() => showToast('📋 Copiado!'));
-  };
-
-  function showToast(msg, err=false) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = err ? 'err show' : 'show';
-    setTimeout(() => t.className = '', 2800);
-  }
-</script>
-</body>
-</html>
+    if (senha === '1
